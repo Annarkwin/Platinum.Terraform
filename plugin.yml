@@ -1,0 +1,16 @@
+name: PlatinumTerraform
+main: com.gmail.Annarkwin.Platinum.Terraform.Terraform
+version: 1.0
+api-version: 1.16
+depend: [PlatinumAPI, PlatinumMMO]
+
+commands:
+  Terra:
+    usage: /Terra help
+    description: "Basically the best building plugin ever"
+    permission: platinum.terra
+    aliases: t
+  Weed:
+    usage: /Weed <radius>
+    description: "Remove miscellaneous plants nearby"
+    permission: platinum.weed
