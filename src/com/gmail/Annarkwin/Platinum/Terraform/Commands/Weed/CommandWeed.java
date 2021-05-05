@@ -11,14 +11,17 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class CommandWeed implements CommandExecutor {
-	
+public class CommandWeed implements CommandExecutor
+{
+
 	private static HashMap<Material, Boolean> weedlist;
-	
-	static {
+
+	static
+	{
+
 		weedlist = new HashMap<Material, Boolean>();
-		
-		//Blocks that are set to always be weeded
+
+		// Blocks that are set to always be weeded
 		weedlist.put(Material.GRASS, true);
 		weedlist.put(Material.TALL_GRASS, true);
 		weedlist.put(Material.FERN, true);
@@ -47,8 +50,8 @@ public class CommandWeed implements CommandExecutor {
 		weedlist.put(Material.LILAC, true);
 		weedlist.put(Material.ROSE_BUSH, true);
 		weedlist.put(Material.PEONY, true);
-		
-		//Blocks that are only weeded if flagged with -a
+
+		// Blocks that are only weeded if flagged with -a
 		weedlist.put(Material.MELON_STEM, true);
 		weedlist.put(Material.PUMPKIN_STEM, true);
 		weedlist.put(Material.WHEAT, true);
@@ -63,66 +66,124 @@ public class CommandWeed implements CommandExecutor {
 		weedlist.put(Material.SPRUCE_SAPLING, true);
 		weedlist.put(Material.SWEET_BERRY_BUSH, true);
 		weedlist.put(Material.NETHER_WART, true);
+
 	}
-	
+
 	@Override
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (!(sender instanceof Player)) {
+	public boolean onCommand( CommandSender sender, Command cmd, String label, String[] args )
+	{
+
+		if (!(sender instanceof Player))
+		{
+
 			sender.sendMessage("§4[Error]:§f This command is for players");
 			return true;
+
 		}
 
 		Player p = (Player) sender;
-		
-		if (args.length > 0){
-			if (!p.hasPermission("Platinum.weed")) 	{p.sendMessage("§4[Error]:§f No permission"); return true;}
-			if (!isNumber(args[0])) 				{p.sendMessage("§4[Error]:§f Please enter a range"); return true;}
-			
+
+		if (args.length > 0)
+		{
+
+			if (!p.hasPermission("Platinum.weed"))
+			{
+
+				p.sendMessage("§4[Error]:§f No permission");
+				return true;
+
+			}
+
+			if (!isNumber(args[0]))
+			{
+
+				p.sendMessage("§4[Error]:§f Please enter a range");
+				return true;
+
+			}
+
 			int range = getNumber(args[0]);
 			Location loc = p.getLocation();
-			
-			for (int x = loc.getBlockX() - range; x < loc.getBlockX() + range; x++) {
-				for (int z = loc.getBlockZ() - range; z < loc.getBlockZ() + range;  z++) {
+
+			for (int x = loc.getBlockX() - range; x < loc.getBlockX() + range; x++)
+			{
+
+				for (int z = loc.getBlockZ() - range; z < loc.getBlockZ() + range; z++)
+				{
+
 					Block block = loc.getWorld().getHighestBlockAt(x, z).getRelative(BlockFace.UP);
 					Boolean flagged = weedlist.get(block.getType());
-					
-					if (flagged == null) continue;
-					else if (flagged) {
+
+					if (flagged == null)
+						continue;
+					else if (flagged)
+					{
+
 						block.setType(Material.AIR);
+
 					}
-					else if (!flagged);
+					else if (!flagged)
+						;
+
 				}
+
 			}
-			
+
 			p.sendMessage("§2[Info]:§f The top layer of blocks has been weeded.");
-			
-		} else {
-			String[] help = {"help"};
-			this.onCommand(sender, cmd, label, help);
+
 		}
-		
+		else
+		{
+
+			String[] help =
+			{
+					"help"
+			};
+			this.onCommand(sender, cmd, label, help);
+
+		}
+
 		return true;
+
 	}
-	
-	public boolean isNumber(String arg) {
-		try {
+
+	public boolean isNumber( String arg )
+	{
+
+		try
+		{
+
 			Integer.parseInt(arg);
 			return true;
+
 		}
-		catch (Exception e){
+		catch (Exception e)
+		{
+
 			return false;
+
 		}
+
 	}
-	
-	public int getNumber(String arg) {
-		try {
+
+	public int getNumber( String arg )
+	{
+
+		try
+		{
+
 			int number = Integer.parseInt(arg);
 			return number;
+
 		}
-		catch (Exception e){
+		catch (Exception e)
+		{
+
 			e.printStackTrace();
 			return 0;
+
 		}
+
 	}
-	
+
 }

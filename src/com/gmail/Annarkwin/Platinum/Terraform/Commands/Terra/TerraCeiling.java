@@ -11,7 +11,8 @@ import com.gmail.Annarkwin.Platinum.MMO.DataLibrary.SelectionManager;
 import com.gmail.Annarkwin.Platinum.Terraform.Clipboard;
 import com.gmail.Annarkwin.Platinum.Terraform.Terraform;
 
-public class TerraCeiling implements Subcommand {
+public class TerraCeiling implements Subcommand
+{
 
 	private String description = "Create a ceiling";
 	private MainCommand main;
@@ -19,56 +20,93 @@ public class TerraCeiling implements Subcommand {
 	private String permission = "platinum.terra.ceiling";
 	private boolean playeronly = true;
 	private String usage = "/t ceiling";
-	
-	public TerraCeiling(MainCommand maincommand) {
+
+	public TerraCeiling( MainCommand maincommand )
+	{
+
 		main = maincommand;
+
 	}
-	
+
 	@Override
-	public String getDescription() {
+	public String getDescription()
+	{
+
 		return description;
+
 	}
 
 	@Override
-	public MainCommand getMainCommand() {
+	public MainCommand getMainCommand()
+	{
+
 		return main;
+
 	}
 
 	@Override
-	public String getName() {
+	public String getName()
+	{
+
 		return name;
+
 	}
 
 	@Override
-	public String getPermission() {
+	public String getPermission()
+	{
+
 		return permission;
+
 	}
 
 	@Override
-	public String getUsage() {
+	public String getUsage()
+	{
+
 		return usage;
+
 	}
 
 	@Override
-	public boolean isPlayerOnly() {
+	public boolean isPlayerOnly()
+	{
+
 		return playeronly;
+
 	}
 
 	@Override
-	public void run(CommandSender sender, String[] args) {
+	public void run( CommandSender sender, String[] args )
+	{
+
 		Player p = (Player) sender;
 		Selection sel = SelectionManager.getSelection(p.getUniqueId());
 		ItemStack mainhand = p.getInventory().getItemInMainHand();
-		
-		if (sel.getArea() == null) 								{p.sendMessage("§4[Error]:§f No selection"); return;}
-		if (!mainhand.getType().isBlock())				{p.sendMessage("§4[Error]:§f Hold the block you'd like to use"); return;}
-		
+
+		if (sel.getArea() == null)
+		{
+
+			p.sendMessage("§4[Error]:§f No selection");
+			return;
+
+		}
+
+		if (!mainhand.getType().isBlock())
+		{
+
+			p.sendMessage("§4[Error]:§f Hold the block you'd like to use");
+			return;
+
+		}
+
 		Clipboard cb = Terraform.getCeiling(sel.getArea());
 		cb.saveClipboard(p);
 		cb.replaceClips(mainhand.getType());
 		cb.pasteBlocks();
-		
+
 		p.sendMessage("§2[Info]:§f Blocks set");
+
 	}
 
 }

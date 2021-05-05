@@ -8,7 +8,8 @@ import com.gmail.Annarkwin.Platinum.API.Subcommand;
 import com.gmail.Annarkwin.Platinum.Terraform.Terraform;
 import com.gmail.Annarkwin.Platinum.Terraform.Terraform.TerraMode;
 
-public class TerraFill implements Subcommand {
+public class TerraFill implements Subcommand
+{
 
 	private String description = "Set fill mode";
 	private MainCommand main;
@@ -16,48 +17,72 @@ public class TerraFill implements Subcommand {
 	private String permission = "platinum.terra.fill";
 	private boolean playeronly = true;
 	private String usage = "/t fill <rad>";
-	
-	public TerraFill(MainCommand maincommand) {
+
+	public TerraFill( MainCommand maincommand )
+	{
+
 		main = maincommand;
+
 	}
-	
+
 	@Override
-	public String getDescription() {
+	public String getDescription()
+	{
+
 		return description;
+
 	}
 
 	@Override
-	public MainCommand getMainCommand() {
+	public MainCommand getMainCommand()
+	{
+
 		return main;
+
 	}
 
 	@Override
-	public String getName() {
+	public String getName()
+	{
+
 		return name;
+
 	}
 
 	@Override
-	public String getPermission() {
+	public String getPermission()
+	{
+
 		return permission;
+
 	}
 
 	@Override
-	public String getUsage() {
+	public String getUsage()
+	{
+
 		return usage;
+
 	}
 
 	@Override
-	public boolean isPlayerOnly() {
+	public boolean isPlayerOnly()
+	{
+
 		return playeronly;
+
 	}
 
 	@Override
-	public void run(CommandSender sender, String[] args) {
+	public void run( CommandSender sender, String[] args )
+	{
+
 		Player p = (Player) sender;
-		
-		Terraform.setMode(p, (Terraform.getMode(p) == TerraMode.FILL) ? TerraMode.NONE:TerraMode.FILL);
+
+		Terraform.setMode(p, (Terraform.getMode(p) == TerraMode.FILL) ? TerraMode.NONE : TerraMode.FILL);
 
 		p.sendMessage("§2[Info]:§f Terra mode set to " + Terraform.getMode(p));
+
 	}
 
 }

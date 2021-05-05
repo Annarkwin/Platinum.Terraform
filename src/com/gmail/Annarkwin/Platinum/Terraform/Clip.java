@@ -8,57 +8,85 @@ import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.util.Vector;
 
-public class Clip {
-	
+public class Clip
+{
+
 	private Material m;
 	private BlockData data;
 	private World w;
 	private Vector location;
-	
-	public Clip(Block b) {
+
+	public Clip( Block b )
+	{
+
 		m = b.getType();
 		data = b.getBlockData();
 		w = b.getWorld();
 		location = b.getLocation().toVector();
+
 	}
-	
-	public Clip(Clip c) {
+
+	public Clip( Clip c )
+	{
+
 		m = c.getMaterial();
 		data = c.getBlockData();
 		w = c.getLocation().getWorld();
 		location = c.getLocation().toVector();
+
 	}
-	
-	public Material getMaterial() {
+
+	public Material getMaterial()
+	{
+
 		return m;
+
 	}
-	
-	public BlockData getBlockData() {
+
+	public BlockData getBlockData()
+	{
+
 		return data;
+
 	}
-	
-	public void setBlock(Material type) {
+
+	public void setBlock( Material type )
+	{
+
 		m = type;
 		data = Bukkit.createBlockData(type);
+
 	}
-	
-	public void setBlock(Material type, BlockData d) {
+
+	public void setBlock( Material type, BlockData d )
+	{
+
 		m = type;
 		data = d;
+
 	}
-	
-	public Location getLocation() {
+
+	public Location getLocation()
+	{
+
 		return location.toLocation(w);
+
 	}
-	
-	public void setLocation(Location l) {
+
+	public void setLocation( Location l )
+	{
+
 		w = l.getWorld();
 		location = l.toVector();
+
 	}
-	
+
 	@Override
-	public boolean equals(Object o) {
+	public boolean equals( Object o )
+	{
+
 		return (location == ((Clip) o).getLocation().toVector());
-	} 
-	
+
+	}
+
 }
