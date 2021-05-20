@@ -7,6 +7,9 @@ import org.bukkit.entity.Player;
 
 import com.gmail.Annarkwin.Platinum.API.MainCommand;
 import com.gmail.Annarkwin.Platinum.API.Subcommand;
+import com.gmail.Annarkwin.Platinum.MMO.DataLibrary.SelectionManager;
+import com.gmail.Annarkwin.Platinum.Terraform.Terraform;
+import com.gmail.Annarkwin.Platinum.Terraform.Terraform.TerraMode;
 
 public class CommandTerra implements CommandExecutor , MainCommand
 {
@@ -32,6 +35,7 @@ public class CommandTerra implements CommandExecutor , MainCommand
 
 		boolean isplayer = sender instanceof Player;
 		if (args.length > 0)
+		{
 			for (Subcommand command : subcommands)
 			{
 
@@ -42,12 +46,21 @@ public class CommandTerra implements CommandExecutor , MainCommand
 						command.run(sender, args);
 					else
 						sender.sendMessage("§4[Error]:§f You don't have permission for that command");
-					return true;
 
+					return true;
 				}
+				else
+					return false;
 
 			}
-		return false;
+		}
+		else
+		{
+		if (isplayer)
+			Terraform.setMode(((Player) sender), TerraMode.NONE);
+			sender.sendMessage("§2[Info]§f Setting Terraform mode to " + TerraMode.NONE);
+		}
+		return true;
 
 	}
 
