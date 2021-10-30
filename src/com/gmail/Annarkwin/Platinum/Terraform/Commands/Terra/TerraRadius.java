@@ -4,77 +4,22 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.gmail.Annarkwin.Platinum.API.CommandHelper;
-import com.gmail.Annarkwin.Platinum.API.MainCommand;
-import com.gmail.Annarkwin.Platinum.API.Subcommand;
+import com.gmail.Annarkwin.Platinum.API.PlatinumCommand;
 import com.gmail.Annarkwin.Platinum.Terraform.Terraform;
 
-public class TerraRadius implements Subcommand
+public class TerraRadius extends PlatinumCommand
 {
 
-	private String description = "Set terra radius";
-	private MainCommand main;
-	private String name = "radius";
-	private String permission = "platinum.terra.radius";
-	private boolean playeronly = true;
-	private String usage = "/t radius <size>";
-
-	public TerraRadius( MainCommand maincommand )
+	public TerraRadius( String name, String permission, boolean player, String description, String usage )
 	{
 
-		main = maincommand;
+		super(name, permission, player, description, usage);
+		// TODO Auto-generated constructor stub
 
 	}
 
 	@Override
-	public String getDescription()
-	{
-
-		return description;
-
-	}
-
-	@Override
-	public MainCommand getMainCommand()
-	{
-
-		return main;
-
-	}
-
-	@Override
-	public String getName()
-	{
-
-		return name;
-
-	}
-
-	@Override
-	public String getPermission()
-	{
-
-		return permission;
-
-	}
-
-	@Override
-	public String getUsage()
-	{
-
-		return usage;
-
-	}
-
-	@Override
-	public boolean isPlayerOnly()
-	{
-
-		return playeronly;
-
-	}
-
-	@Override
-	public void run( CommandSender sender, String[] args )
+	public boolean run( CommandSender sender, String cmdname, String[] args )
 	{
 
 		Player p = (Player) sender;
@@ -83,7 +28,7 @@ public class TerraRadius implements Subcommand
 		{
 
 			p.sendMessage("§4[Error]: §fEnter a positive number");
-			return;
+			return true;
 
 		}
 
@@ -91,6 +36,8 @@ public class TerraRadius implements Subcommand
 
 		p.sendMessage("§2[Info]: §fRadius set to " + args[1]);
 
+		return true;
+		
 	}
 
 }

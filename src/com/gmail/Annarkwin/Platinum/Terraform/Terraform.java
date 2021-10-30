@@ -12,7 +12,21 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.Annarkwin.Platinum.API.Cube;
+import com.gmail.Annarkwin.Platinum.API.PlatinumMainCommand;
 import com.gmail.Annarkwin.Platinum.Terraform.Commands.Terra.CommandTerra;
+import com.gmail.Annarkwin.Platinum.Terraform.Commands.Terra.TerraBox;
+import com.gmail.Annarkwin.Platinum.Terraform.Commands.Terra.TerraCeiling;
+import com.gmail.Annarkwin.Platinum.Terraform.Commands.Terra.TerraEx;
+import com.gmail.Annarkwin.Platinum.Terraform.Commands.Terra.TerraFill;
+import com.gmail.Annarkwin.Platinum.Terraform.Commands.Terra.TerraFloor;
+import com.gmail.Annarkwin.Platinum.Terraform.Commands.Terra.TerraHelp;
+import com.gmail.Annarkwin.Platinum.Terraform.Commands.Terra.TerraOutline;
+import com.gmail.Annarkwin.Platinum.Terraform.Commands.Terra.TerraOverlay;
+import com.gmail.Annarkwin.Platinum.Terraform.Commands.Terra.TerraRadius;
+import com.gmail.Annarkwin.Platinum.Terraform.Commands.Terra.TerraReplace;
+import com.gmail.Annarkwin.Platinum.Terraform.Commands.Terra.TerraSet;
+import com.gmail.Annarkwin.Platinum.Terraform.Commands.Terra.TerraUndo;
+import com.gmail.Annarkwin.Platinum.Terraform.Commands.Terra.TerraWalls;
 import com.gmail.Annarkwin.Platinum.Terraform.Commands.Weed.CommandWeed;
 
 public class Terraform extends JavaPlugin
@@ -56,8 +70,22 @@ public class Terraform extends JavaPlugin
 
 	public void enableCommands()
 	{
+		PlatinumMainCommand terra = new CommandTerra("terra", "platinum.command.terra", true, "Terraforming!", "/t help (page)");
+		terra.addChildCommand(new TerraBox("box", "platinum.command.terra.box", true, "Create an empty box", "/terra box"));
+		terra.addChildCommand(new TerraCeiling("ceiling", "platinum.command.terra.ceiling", true, "Create a ceiling", "/terra ceiling"));
+		terra.addChildCommand(new TerraEx("ex", "platinum.command.terra.ex", true, "Excavate a layer", "/terra ex ???"));
+		terra.addChildCommand(new TerraFill("fill", "platinum.command.terra.fill", true, "Fill a hole", "/terra fill ???"));
+		terra.addChildCommand(new TerraFloor("floor", "platinum.command.terra.floor", true, "Create a floor", "/terra floor"));
+		terra.addChildCommand(new TerraHelp("help", "platinum.command.terra.help", true, "Terra command help", "/terra help <page>"));
+		terra.addChildCommand(new TerraOutline("outline", "platinum.command.terra.outline", true, "Outline an empty outline box", "/terra outline"));
+		terra.addChildCommand(new TerraOverlay("overlay", "platinum.command.terra.overlay", true, "Overlay a layer", "/terra overlay ???"));
+		terra.addChildCommand(new TerraRadius("radius", "platinum.command.terra.radius", true, "Set interactive mode radius", "/terra radius <size>"));
+		terra.addChildCommand(new TerraReplace("replace", "platinum.command.terra.replace", true, "Replace current selection", "/terra replace"));
+		terra.addChildCommand(new TerraSet("set", "platinum.command.terra.set", true, "Set current selection", "/terra set"));
+		terra.addChildCommand(new TerraUndo("undo", "platinum.command.terra.undo", true, "Undo last change", "/terra undo"));
+		terra.addChildCommand(new TerraWalls("walls", "platinum.command.terra.box", true, "Create walls", "/terra walls"));
 
-		getCommand("Terra").setExecutor(new CommandTerra());
+		getCommand("Terra").setExecutor(terra);
 		getCommand("Weed").setExecutor(new CommandWeed());
 
 	}

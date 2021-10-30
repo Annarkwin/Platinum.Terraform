@@ -4,80 +4,25 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import com.gmail.Annarkwin.Platinum.API.MainCommand;
-import com.gmail.Annarkwin.Platinum.API.Subcommand;
+import com.gmail.Annarkwin.Platinum.API.PlatinumCommand;
 import com.gmail.Annarkwin.Platinum.MMO.Selection;
 import com.gmail.Annarkwin.Platinum.MMO.DataLibrary.SelectionManager;
 import com.gmail.Annarkwin.Platinum.Terraform.Clipboard;
 import com.gmail.Annarkwin.Platinum.Terraform.Terraform;
 
-public class TerraWalls implements Subcommand
+public class TerraWalls extends PlatinumCommand
 {
 
-	private String description = "Create walls";
-	private MainCommand main;
-	private String name = "walls";
-	private String permission = "platinum.terra.walls";
-	private boolean playeronly = true;
-	private String usage = "/t walls";
-
-	public TerraWalls( MainCommand maincommand )
+	public TerraWalls( String name, String permission, boolean player, String description, String usage )
 	{
 
-		main = maincommand;
+		super(name, permission, player, description, usage);
+		// TODO Auto-generated constructor stub
 
 	}
 
 	@Override
-	public String getDescription()
-	{
-
-		return description;
-
-	}
-
-	@Override
-	public MainCommand getMainCommand()
-	{
-
-		return main;
-
-	}
-
-	@Override
-	public String getName()
-	{
-
-		return name;
-
-	}
-
-	@Override
-	public String getPermission()
-	{
-
-		return permission;
-
-	}
-
-	@Override
-	public String getUsage()
-	{
-
-		return usage;
-
-	}
-
-	@Override
-	public boolean isPlayerOnly()
-	{
-
-		return playeronly;
-
-	}
-
-	@Override
-	public void run( CommandSender sender, String[] args )
+	public boolean run( CommandSender sender, String cmdname, String[] args )
 	{
 
 		Player p = (Player) sender;
@@ -88,7 +33,7 @@ public class TerraWalls implements Subcommand
 		{
 
 			p.sendMessage("§4[Error]:§f No selection");
-			return;
+			return true;
 
 		}
 
@@ -96,7 +41,7 @@ public class TerraWalls implements Subcommand
 		{
 
 			p.sendMessage("§4[Error]:§f Hold the block you'd like to use");
-			return;
+			return true;
 
 		}
 
@@ -107,6 +52,8 @@ public class TerraWalls implements Subcommand
 
 		p.sendMessage("§2[Info]:§f Blocks set");
 
+		return true;
+		
 	}
 
 }

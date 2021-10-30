@@ -6,54 +6,21 @@ import org.bukkit.command.CommandSender;
 
 import com.gmail.Annarkwin.Platinum.API.CommandHelper;
 import com.gmail.Annarkwin.Platinum.API.HelpCommand;
-import com.gmail.Annarkwin.Platinum.API.MainCommand;
-import com.gmail.Annarkwin.Platinum.API.Subcommand;
+import com.gmail.Annarkwin.Platinum.API.PlatinumCommand;
 
-public class TerraHelp implements HelpCommand , Subcommand
+public class TerraHelp extends PlatinumCommand implements HelpCommand
 {
 
-	private String description = "Show Terra help";
-	private MainCommand main;
-	private String name = "help";
-	private String permission = "platinum.terra.help";
-	private boolean playeronly = true;
-	private String usage = "/terra help";
-
-	public TerraHelp( MainCommand maincommand )
+	public TerraHelp( String name, String permission, boolean player, String description, String usage )
 	{
 
-		main = maincommand;
+		super(name, permission, player, description, usage);
+		// TODO Auto-generated constructor stub
 
 	}
 
 	@Override
-	public String getDescription()
-	{
-
-		return description;
-
-	}
-
-	@Override
-	public String[] getHelpEntries( CommandSender sender, MainCommand command )
-	{
-
-		ArrayList<String> entries = new ArrayList<String>();
-
-		for (Subcommand sc : command.getSubcommands())
-		{
-
-			if (sender.hasPermission(sc.getPermission()))
-				entries.add(getHelpString(sc));
-
-		}
-
-		return (entries.toArray(new String[0]));
-
-	}
-
-	@Override
-	public String getHelpString( Subcommand command )
+	public String getHelpString( PlatinumCommand command )
 	{
 
 		return " §5" + command.getUsage() + " §6- " + command.getDescription();
@@ -61,50 +28,28 @@ public class TerraHelp implements HelpCommand , Subcommand
 	}
 
 	@Override
-	public MainCommand getMainCommand()
+	public String[] getHelpEntries( CommandSender sender, PlatinumCommand command )
 	{
 
-		return main;
+		ArrayList<String> entries = new ArrayList<String>();
+
+		for (PlatinumCommand sc : command.getChildren())
+		{
+
+			if (sender.hasPermission(sc.getPermissionHook()))
+				entries.add(getHelpString(sc));
+
+		}
+
+		return ((String[]) entries.toArray(new String[0]));
 
 	}
 
 	@Override
-	public String getName()
+	public boolean run( CommandSender sender, String cmdname, String[] args )
 	{
 
-		return name;
-
-	}
-
-	@Override
-	public String getPermission()
-	{
-
-		return permission;
-
-	}
-
-	@Override
-	public String getUsage()
-	{
-
-		return usage;
-
-	}
-
-	@Override
-	public boolean isPlayerOnly()
-	{
-
-		return playeronly;
-
-	}
-
-	@Override
-	public void run( CommandSender sender, String[] args )
-	{
-
-		String[] entries = getHelpEntries(sender, main);
+		String[] entries = getHelpEntries(sender, getParent());
 
 		if (args.length > 1)
 		{
@@ -129,6 +74,8 @@ public class TerraHelp implements HelpCommand , Subcommand
 			CommandHelper.sendHelp(sender, entries, "Terra", 1);
 
 		}
+
+		return true;
 
 	}
 

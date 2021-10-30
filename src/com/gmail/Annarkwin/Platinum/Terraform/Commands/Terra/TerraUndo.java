@@ -3,77 +3,22 @@ package com.gmail.Annarkwin.Platinum.Terraform.Commands.Terra;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.gmail.Annarkwin.Platinum.API.MainCommand;
-import com.gmail.Annarkwin.Platinum.API.Subcommand;
+import com.gmail.Annarkwin.Platinum.API.PlatinumCommand;
 import com.gmail.Annarkwin.Platinum.Terraform.Terraform;
 
-public class TerraUndo implements Subcommand
+public class TerraUndo extends PlatinumCommand
 {
 
-	private String description = "Undo last change";
-	private MainCommand main;
-	private String name = "undo";
-	private String permission = "platinum.terra.undo";
-	private boolean playeronly = true;
-	private String usage = "/t undo";
-
-	public TerraUndo( MainCommand maincommand )
+	public TerraUndo( String name, String permission, boolean player, String description, String usage )
 	{
 
-		main = maincommand;
+		super(name, permission, player, description, usage);
+		// TODO Auto-generated constructor stub
 
 	}
-
+	
 	@Override
-	public String getDescription()
-	{
-
-		return description;
-
-	}
-
-	@Override
-	public MainCommand getMainCommand()
-	{
-
-		return main;
-
-	}
-
-	@Override
-	public String getName()
-	{
-
-		return name;
-
-	}
-
-	@Override
-	public String getPermission()
-	{
-
-		return permission;
-
-	}
-
-	@Override
-	public String getUsage()
-	{
-
-		return usage;
-
-	}
-
-	@Override
-	public boolean isPlayerOnly()
-	{
-
-		return playeronly;
-
-	}
-
-	@Override
-	public void run( CommandSender sender, String[] args )
+	public boolean run( CommandSender sender, String cmdname, String[] args )
 	{
 
 		Player p = (Player) sender;
@@ -82,6 +27,8 @@ public class TerraUndo implements Subcommand
 
 		p.sendMessage("§2[Info]: §fChange reverted");
 
+		return true;
+		
 	}
 
 }
