@@ -48,7 +48,7 @@ public class CommandTerra extends PlatinumMainCommand
 				
 			}
 		}
-		return false;
+		return true;
 
 	}
 

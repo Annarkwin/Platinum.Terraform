@@ -1,5 +1,6 @@
 package com.gmail.Annarkwin.Platinum.Terraform.Commands.Terra;
 
+import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -37,7 +38,7 @@ public class TerraOutline extends PlatinumCommand
 
 		}
 
-		if (!mainhand.getType().isBlock())
+		if (!mainhand.getType().isBlock() && mainhand.getType() != Material.STICK)
 		{
 
 			p.sendMessage("§4[Error]:§f Hold the block you'd like to use");

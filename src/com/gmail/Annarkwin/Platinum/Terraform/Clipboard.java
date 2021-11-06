@@ -48,6 +48,7 @@ public class Clipboard
 	public void replaceClips( Material m )
 	{
 
+		if (m == Material.STICK) m = Material.AIR;
 		for (Clip c : clips)
 		{
 
@@ -59,7 +60,7 @@ public class Clipboard
 
 	public void replaceClips( Material m, BlockData data )
 	{
-
+		if (m == Material.STICK) m = Material.AIR;
 		for (Clip c : clips)
 		{
 
